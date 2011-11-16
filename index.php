@@ -1,21 +1,26 @@
-<?php require_once("Includes/connection.php"); ?>
+<?php require_once("includes/connection.php"); ?>
 
 <?php include("includes/header.php"); ?>
 
-<?php
-    echo "Esto es una prueba, Desplegar usuarios: <br /><br />";
+<h2>Iniciar sesión</h2>
+<form action="login.php" method="post">
+    <p>Usuario: <input type="text" name="user_name" value="" id="user_name" /></p>
+    <p>Password: <input type="password" name="password" value="" id="password" /></p>
+    <input type="submit" name="submit" value="Entrar!" />
+</form>
 
-    global $connection;
-    $query = "SELECT * FROM user";
-    
-    $result_set = mysql_query($query, $connection);
-    
-    while ($users = mysql_fetch_array($result_set)) {
-        echo $users['name'] . "<br />";
-        
-        echo $users['email'];
-    }
-    
-?>
+<h2>Registrate!</h2>
+		<form action="registration.php" method="post">
+				<p>Username:
+					 <input type="text" name="username" maxlength="40" value=""; />
+				Email:
+					 <input type="text" name="email" maxlength="100" value=""; />
+				</p>
+				<p>Password:
+					 <input type="password" name="password" value=""; />
+				</p>
+				<input type="submit" name="submit" value="JOIN NOW" />
+			</form>
+
 
 <?php require("Includes/footer.php"); ?>
