@@ -4,28 +4,30 @@
 <?php require("Includes/header.php"); ?>
 <?php
     global $connection;
-    
-    
-    
-    $username = trim(mysql_prep($_POST['user_name']));
-    $password = trim(mysql_prep($_POST['password']));
-    $hashed_password = sha1($password);
-    
-    $query = "SELECT * 
-                FROM user 
-                WHERE user_name = '{$username}' 
-                AND password = '{$hashed_password}'";
-    
-    $result = mysql_query($query, $connection);
-    
-    if($result)
-    {
+		
+	//Need to check form data
+	//Need to check required fields
+	//Need to check fields with max lenghts
+	
+	//Prepare data for query
+	$email = trim(mysql_prep($_POST['email']));
+	$password = trim(mysql_prep($_POST['password']));
+	$hashed_password = sha1($password);
+	
+	$query = "SELECT user_name ";
+			$query .= "FROM user ";
+			$query .= "WHERE email = '{$email}' ";
+			$query .= "AND password = '{$hashed_password}' ";
+			$result = mysql_query($query, $connection);
+			confirm_query($result);
+			
+    if(mysql_num_rows($result) == 1){
         $found_user = mysql_fetch_array($result);
-        $_SESSION['user_name'] = $found_user['user_name'];
-        
-        echo "Welcome " . $found_user['user_name'];
-    } else {
-        echo "FAILED " . mysql_error();
+        $_SESSION['username'] = $found_user['user_name'];
+        redirect_to("dashboard.php");
+    } 
+    else{
+        echo "Problem connecting";
     }
 ?>
 
