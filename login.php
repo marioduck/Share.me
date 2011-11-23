@@ -24,6 +24,7 @@
     if(mysql_num_rows($result) == 1){
         $found_user = mysql_fetch_array($result);
         $_SESSION['username'] = $found_user['user_name'];
+        $_SESSION['user_id'] = $found_user['user_id'];
         redirect_to("dashboard.php");
     } 
     else{

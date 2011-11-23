@@ -53,4 +53,51 @@
 			redirect_to('settings.php?new=1');
 		}	
 	}
+	
+		function get_blog_id($user_id){
+		global $connection;
+		$query = "SELECT blog_id ";
+			$query .= "FROM blog ";
+			$query .= "WHERE user_id = '{$user_id}'";
+		$result = mysql_query($query, $connection);
+		confirm_query($result);
+			
+		$found_blog = mysql_fetch_array($result);
+		$found_blog = $found_blog['blog_id'];
+				
+		if(mysql_num_rows($result) == 0){
+			redirect_to('settings.php?new=1');
+		}
+		
+		return $found_blog;	
+	}
+	
+	function return_posts($user_name)
+	{
+		global $connection;
+		$query = "SELECT * FROM posts ";
+			$query .= "WHERE blog_id = (";
+			$query .= "SELECT blog_id FROM blog WHERE user_id = (SELECT user_id	FROM user WHERE user_name = '{$user_name}')) AND published=1";
+		
+		$result = mysql_query($query, $connection);
+		confirm_query($result);
+			
+		if(mysql_num_rows($result) == 0){
+			redirect_to('settings.php?new=1');
+		}
+		
+		while ($db_field = mysql_fetch_assoc($result)) {
+			echo "<h3>" . $db_field['title'] . "</h3>";
+			echo $db_field['date_created'] . "<BR>";
+			echo "<p class=\"p_content\">" . $db_field['content'] . "</p>";
+		}
+	}
+	
+	function tags($post_tags)
+	{
+
+		strtolower();
+		
+	}
+	
 ?>

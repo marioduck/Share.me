@@ -1,0 +1,8 @@
+RewriteEngine On # Iniciar url rewriting
+
+#RewriteRule    ^categoria    categories.php    [NC,C]
+RewriteRule    ^categoria/([A-Za-z0-9-]+)/?$    categories.php?cat=$1    [NC,L]    # procesar urls que provengan de categoria
+
+RewriteRule    ^blog/([A-Za-z0-9-]+)/?$    profile.php?u=$1    [NC,L]
+
+# NC case sensitive - C chained - L if valid ignore any other rules

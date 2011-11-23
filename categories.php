@@ -9,9 +9,10 @@
     echo "<h2>Explora:</h2>";
     
     while ($categories = mysql_fetch_array($result)) {
-        echo "<h3><a href=\"categories.php?cat=" .
+        echo "<h3><a href=\"" .
             urlencode($categories['cat_name']) .
                 "\"> {$categories['cat_name']}</a></h3>";
+		
         
     }
 ?>
