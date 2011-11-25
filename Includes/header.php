@@ -9,7 +9,10 @@
 			<div id="header_gretting">
 				<?php 
 					if(isset($_SESSION['username'])){
-						$user_greeting = "Welcome back, " . "<a href=\"profile.php?u=" . $_SESSION['username']. "\"> {$_SESSION['username']} </a>"; 
+						$user_greeting = "Welcome back, "
+							. "<a href=\"profile.php?u="
+							. $_SESSION['username']
+							. "\"> {$_SESSION['username']} </a>"; 
 						$user_greeting.= "<p><a href=\"logout.php\"> Logout?</a></p>";
 						echo $user_greeting;  
 					}

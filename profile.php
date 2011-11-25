@@ -4,6 +4,12 @@
 <?php include("includes/header.php"); ?>
 
 <?php
+
+	echo "<a href=\"follow.php?u="  . $_GET['u'] . "\">Follow {$_GET['u']}<a/>";
+
+?>
+
+<?php
     global $connection;
 	
 	if(!isset($_GET['u'])){
