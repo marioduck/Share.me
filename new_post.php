@@ -20,7 +20,10 @@
 		$post_content = mysql_prep($_POST['post_content']);
 		$post_date = mysql_prep($_POST['p_date']);
 		$post_slug = mysql_prep($_POST['post_slug']);
-		$blog_id = get_blog_id($_SESSION['user_id']);
+		
+		//Get blog info using 1 for user_id
+		$blog_info = get_blog_info($_SESSION['user_id'], 1);
+		$blog_id = $blog_info['blog_id'];
 		
 		// Save = Publish, otherwise will be saved as a draft
 		if(isset($_POST['publish'])) {   $post_published = 1;   }

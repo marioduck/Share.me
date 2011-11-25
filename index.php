@@ -1,11 +1,14 @@
 <?php require_once("includes/session.php"); ?>
-<?php require_once("includes/connection.php"); ?>
+<?php require_once("Includes/connection.php"); ?>
 <?php require_once("Includes/functions.php"); ?>
 <?php include("includes/header.php"); ?>
 
-<?php
-//Login and registration forms, only show up when there is not a session cookie
+<?php 
+	//Login and registration forms, only show up when there is not a session cookie
 	if(!isset($_SESSION['username'])){
+		if(isset($_GET['m'])){
+			echo "<div id=\"w_message\">You must be logged in to do that</div>"; }		
+		
 		$greeting = "<h2>Join share.me now!</h2>"; 
 		$greeting.= "<form action=\"registration.php\" method=\"post\">";
 		$greeting.= "<p>Username: <input type=\"text\" name=\"username\" maxlength=\"40\"; />";
