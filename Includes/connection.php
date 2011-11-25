@@ -1,6 +1,6 @@
 <?php
 		//require("constants.php");
-		$connection = mysql_connect("localhost", "root", "tentomon");
+		$connection = mysql_connect("localhost", "root", "191942ko");
         if(!$connection){
             die("Conexión a la base de datos falló: " . mysql_error());
         }
