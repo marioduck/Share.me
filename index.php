@@ -1,34 +1,30 @@
+<?php require_once("includes/session.php"); ?>
 <?php require_once("Includes/connection.php"); ?>
+<?php require_once("Includes/functions.php"); ?>
 <?php include("includes/header.php"); ?>
 
-	<h2>Registrate!</h2>
-		<form action="registration.php" method="post">
-				<p>Username:
-					 <input type="text" name="username" maxlength="40" value=""; />
-				Email:
-					 <input type="text" name="email" maxlength="100" value=""; />
-				</p>
-				<p>Password:
-					 <input type="password" name="password" value=""; />
-				</p>
-				<input type="submit" name="submit" value="JOIN NOW" />
-			</form>
-
- <?php   
-	global $connection;
-	
-    echo "Esto es una prueba, Desplegar usuarios: <br /><br />";
-	
-	$query = "SELECT * FROM user";
-    
-    $result_set = mysql_query($query, $connection);
-    
-    while ($users = mysql_fetch_array($result_set)) {
-        echo $users['user_name'] . "<br />";
-        
-        echo $users['email'];
-    }
-    
+<?php 
+	//Login and registration forms, only show up when there is not a session cookie
+	if(!isset($_SESSION['username'])){
+		if(isset($_GET['m'])){
+			echo "<div id=\"w_message\">You must be logged in to do that</div>"; }		
+		
+		$greeting = "<h2>Join share.me now!</h2>"; 
+		$greeting.= "<form action=\"registration.php\" method=\"post\">";
+		$greeting.= "<p>Username: <input type=\"text\" name=\"username\" maxlength=\"40\"; />";
+		$greeting.= "Email: <input type=\"text\" name=\"email\" maxlength=\"100\"; /> </p> ";
+		$greeting.= "<p>Password: <input type=\"password\" name=\"password\"; /> </p>";
+		$greeting.= "<input type=\"submit\" name=\"submit\" value=\"Join\" /> </form>";
+		
+		$greeting.= "<h2>Login to your account</h2>"; 
+		$greeting.= "<form action=\"login.php\" method=\"post\">";
+		$greeting.= "<p> Email: <input type=\"text\" name=\"email\" maxlength=\"100\"; />";
+		$greeting.= "Password: <input type=\"password\" name=\"password\"; /> </p>";
+		$greeting.= "<input type=\"submit\" name=\"submit\" value=\"Join\" /> </form>";
+		
+		echo $greeting;
+	}
+	else redirect_to('dashboard.php');
 ?>
 
 <?php require("Includes/footer.php"); ?>
