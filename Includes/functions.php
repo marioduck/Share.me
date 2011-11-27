@@ -140,7 +140,7 @@
 		
 	}
 	
-<<<<<<< HEAD
+
 	//Get set of followers/subscriptions
 	function get_subscriptions($subs_type, $userid){
 		global $connection;
@@ -175,7 +175,7 @@
 					
 				}
 			}
-=======
+
 	//Prints the image as html using a 50*50(px) format
 	function get_user_pic($user_id)
 	{
@@ -189,7 +189,6 @@
 		closedir($handle);
 		
 		echo "<img src=\"Images/user_profile/{$user_id}/{$user_pic}\"  WIDTH=50 HEIGHT=50>";
->>>>>>> 9232b1224efa511adea20545aebb1c9ba65fb8ee
 		}
 	}
 ?>
