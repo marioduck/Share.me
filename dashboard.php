@@ -3,6 +3,12 @@
 <?php require_once("Includes/functions.php"); ?>
 <?php include("includes/header.php"); ?>
 
+<?php	
+	echo "Following <a href=\"subscriptions.php?subs_type=user_id\">" . mysql_num_rows(get_subscriptions("user_id", $_SESSION['user_id'])) . " people</a>.<br/>";
+	echo "Being followed by <a href=\"subscriptions.php?subs_type=subs_user_id\">" . mysql_num_rows(get_subscriptions("subs_user_id", $_SESSION['user_id'])) . " people</a>.";
+?>
+
+
 <div id="main_dash">
 	<?php
 		//Check if user has created the blog, if not redirect to settings so the blog can be created

@@ -136,4 +136,41 @@
 		strtolower();
 		
 	}
+	
+	//Get set of followers/subscriptions
+	function get_subscriptions($subs_type, $userid){
+		global $connection;
+		
+		$query = "SELECT * FROM subscription WHERE {$subs_type} = {$userid} AND accepted_request = 'a'";
+		$subs = mysql_query($query, $connection);
+		confirm_query($subs);
+		
+		return $subs;
+	}
+	
+	
+	//Determine wheter user requested followers or subscriptions and return them
+	function sort_subscriptions($subs_type, $userid) {
+		global $connection;
+		$subs = get_subscriptions($subs_type, $userid);
+		
+		if(mysql_num_rows($subs) == 0) {
+			echo "No users to display";
+		} else {			
+			while($subs_field = mysql_fetch_assoc($subs)) {
+				if ($subs_type == "user_id") {
+					$query = "SELECT * FROM user WHERE user_id = {$subs_field['subs_user_id']}";
+				} elseif ($subs_type == "subs_user_id") {
+					$query = "SELECT * FROM user WHERE user_id = {$subs_field['user_id']}";
+				}
+				$usernames = mysql_query($query, $connection);
+				confirm_query($usernames);
+				
+				while($list = mysql_fetch_array($usernames)) {
+					echo $list['user_name'] . "<br />";
+					
+				}
+			}
+		}
+	}
 ?>
