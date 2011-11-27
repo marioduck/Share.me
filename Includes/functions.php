@@ -95,12 +95,15 @@
 		$result = mysql_query($query, $connection);
 		confirm_query($result);
 		
-		$result = mysql_query($query, $connection);
-		confirm_query($result);
-			
 		$blog_info = mysql_fetch_array($result);
 		
-		return $blog_info;
+		if(mysql_num_rows($result) == 0){
+			//If no blog exists, return false to know that a blog must be created before using the site.
+			return false;
+		}
+		else {
+			return $blog_info;
+		}
 	}
 	
 	function return_posts($blog_name)
@@ -135,5 +138,21 @@
 
 		strtolower();
 		
+	}
+	
+	//Prints the image as html using a 50*50(px) format
+	function get_user_pic($user_id)
+	{
+		$directory = "Images/user_profile/" . $user_id . "/";
+		if ($handle = opendir($directory)) {
+			while (false !== ($file = readdir($handle))) {
+				if ($file != "." && $file != "..") {
+					$user_pic = $file;
+				}
+			}
+		closedir($handle);
+		
+		echo "<img src=\"Images/user_profile/{$user_id}/{$user_pic}\"  WIDTH=50 HEIGHT=50>";
+		}
 	}
 ?>
