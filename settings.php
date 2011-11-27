@@ -41,6 +41,9 @@
 			}
 			if ($result = mysql_query($query, $connection)) {
 				$message = "Settings saved successfully"; 
+				$directory = 'images/user_profile/' . $_SESSION['user_id'] . '/';
+				if(file_exists($directory)){ $message = "adsfadsfasdf"; }
+				else { mkdir($directory, 0700); }
 			} else {
 				$message = "The was an error, please try again.";
 				$message .= "<br />" . mysql_error();
@@ -60,7 +63,7 @@
 		<?php 
 			//If got here because a blog has not been created "new" will be in the url, so previous data will not be fetched and
 			//...a blog will have to be created to continue using the site
-			if(isset($_GET['new']))
+			if(!get_blog_inf($_SESSION['user_id'])
 			{
 				$message = "It seems you're new here, we need to ask some questions about your blog first."; 
 			}
