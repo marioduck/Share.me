@@ -175,6 +175,8 @@
 					
 				}
 			}
+		}
+	}
 
 	//Prints the image as html using a 50*50(px) format
 	function get_user_pic($user_id)
