@@ -14,7 +14,7 @@
 							$user_greeting = "Welcome back, " . $_SESSION['username']; }
 						else{
 							$blog_info = get_blog_info($_SESSION['user_id'], 1);
-							$user_greeting = "Welcome back, " . "<a href=\"blog.php?blog=" . $blog_info['name'] . "\">" . $_SESSION['username'] . "</a>"; 
+							$user_greeting = "Welcome back, " . "<a href=\"blog.php?blog=" . $_SESSION['username'] . "\">" . $_SESSION['username'] . "</a>"; 
 							$user_greeting.= "<p><a href=\"logout.php\"> Logout?</a></p>";
 							echo $user_greeting;  
 							$user_pic = get_user_pic($_SESSION['user_id']);}
