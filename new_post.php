@@ -20,6 +20,7 @@
 		$post_content = mysql_prep($_POST['post_content']);
 		$post_date = mysql_prep($_POST['p_date']);
 		$post_slug = mysql_prep($_POST['post_slug']);
+		$post_category = $_POST['category'];
 		
 		//Get blog info using 1 for user_id
 		$blog_info = get_blog_info($_SESSION['user_id'], 1);
@@ -32,9 +33,9 @@
 		// !!! Database submission only proceeds if there were NO errors.
 		if (empty($errors)) {
 			$query = "INSERT INTO posts (
-						content, title, date_created, published, slug, blog_id
+						content, title, date_created, published, slug, blog_id, cat_id
 					) VALUES (
-						'{$post_content}', '{$post_title}', '{$post_date}', {$post_published}, '{$post_slug}', '{$blog_id}'
+						'{$post_content}', '{$post_title}', '{$post_date}', {$post_published}, '{$post_slug}', '{$blog_id}', '{$post_category}'
 					)";
 			if ($result = mysql_query($query, $connection)) {
 				// as is, $message will still be discarded on the redirect
@@ -73,6 +74,19 @@
 			</p>
 			<p>Publish date: 
 				<input type="text" name="p_date" value="<?php echo date("Y-n-j"); ?>" id="p_date"; /> 
+			</p>
+			<p>Category:
+				<select name="category">
+				<?php
+					//Grab existing categories
+					$categories = get_category();
+					foreach($categories as $category){
+						echo "<option value={$category['cat_id']}>";
+						echo "{$category['cat_name']}";
+						echo "</option>";
+					}
+				?>
+				</select>
 			</p>
 			<input type="submit" name="publish" value="Publish Post" />
 			<input type="submit" name="save" value="Save as Draft" />

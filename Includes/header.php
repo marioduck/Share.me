@@ -10,15 +10,18 @@
 			<div id="header_gretting">
 				<?php 
 					if(isset($_SESSION['username'])){
-						if(fist_time($_SESSION['user_id'])){
-							$user_greeting = "Welcome back, " . $_SESSION['username']; }
+						if(!get_blog_info($_SESSION['user_id'], 1)){
+							$user_greeting = "Welcome back, " . $_SESSION['username']; 
+						}
 						else{
-							$blog_info = get_blog_info($_SESSION['user_id'], 1);
-							$user_greeting = "Welcome back, " . "<a href=\"blog.php?blog=" . $_SESSION['username'] . "\">" . $_SESSION['username'] . "</a>"; 
+							$user_greeting = "Welcome back, " . "<a href=\"blog.php?user=" . $_SESSION['username'] . "\">" . $_SESSION['username'] . "</a>"; 
 							$user_greeting.= "<p><a href=\"logout.php\"> Logout?</a></p>";
 							echo $user_greeting;  
-							$user_pic = get_user_pic($_SESSION['user_id']);}
-							echo $user_pic;
+							$user_pic = get_user_pic($_SESSION['user_id']);
+							echo "<img src=\"{$user_pic}\" width=50px height=50px>";
+							$num_notifications = get_number_notifications($_SESSION['user_id']);
+							echo "<span id=\"notification_tray\"> Notifications {$num_notifications} </span>";
+						}
 					}
 				?>
 			</div>

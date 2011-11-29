@@ -20,7 +20,7 @@
         $result = mysql_query($query, $connection);
         $blog_setting = mysql_fetch_array($result);
                 
-        if ($blog_setting[0] == 1){
+        if ($blog_setting[0] == 1 || $blog_setting[0] == 2){
             $status = "a";
         } elseif ($blog_setting[0] == 3) {
             $status = "p";

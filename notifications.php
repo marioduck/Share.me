@@ -3,8 +3,9 @@
 <?php require_once("Includes/functions.php"); ?>
 <?php include("includes/header.php"); ?>
 
-<?php 
-	get_user_pic(8);
-?>
+<div id="main_dash">
+	Here you can view your pending actions, so far you have:
+	
+</div>
 
 <?php require("Includes/footer.php"); ?>
